@@ -1,0 +1,13 @@
+name: Build QMK Firmware
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: qmk/qmk_setup@v1
+    - run: qmk compile -kb darkproject/alu81a -km default
+    - uses: actions/upload-artifact@v3
+      with:
+        name: firmware
+        path: "*.hex"
